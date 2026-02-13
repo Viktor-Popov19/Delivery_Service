@@ -1,5 +1,5 @@
-#156840061
-def min_platforms(robots: list, limit: int) -> int:
+#156913842
+def min_platforms(robots: list[int], limit: int) -> int:
     """
     Вычисляет минимальное количество платформ для перевозки роботов.
 
@@ -10,13 +10,13 @@ def min_platforms(robots: list, limit: int) -> int:
     Возвращает:
         минимальное количество платформ
     """
-    robots.sort()
+    sorted_robots = sorted(robots)
     left = 0
-    right = len(robots) - 1
+    right = len(sorted_robots) - 1
     platforms = 0
 
     while left <= right:
-        if robots[left] + robots[right] <= limit:
+        if sorted_robots[left] + sorted_robots[right] <= limit:
             left += 1
         right -= 1
         platforms += 1
@@ -25,11 +25,8 @@ def min_platforms(robots: list, limit: int) -> int:
 
 
 if __name__ == "__main__":
-    with open('input.txt', 'r', encoding='utf-8') as file_in:
-        robots = list(map(int, file_in.readline().split()))
-        limit = int(file_in.readline())
+    robots: list[int] = list(map(int, input().split()))
+    limit: int = int(input())
 
-    result = min_platforms(robots, limit)
-
-    with open('output.txt', 'w', encoding='utf-8') as file_out:
-        file_out.write(str(result))
+    result: int = min_platforms(robots, limit)
+    print(result)
